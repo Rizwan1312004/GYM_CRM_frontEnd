@@ -7,7 +7,9 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem("access_token") || null);
+  const [token, setToken] = useState(
+    localStorage.getItem("access_token") || null,
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,17 +22,20 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
       }
     } else {
-        setUser(null);
+      setUser(null);
     }
   }, [token]);
 
   const login = async (email, password) => {
     try {
-      const response = await fetch("http://localhost:8000/api/token/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: email, password }),
-      });
+      const response = await fetch(
+        "https://gym-crm-backend-1-es0x.onrender.com/api/token/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: email, password }),
+        },
+      );
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem("access_token", data.access);
@@ -39,7 +44,9 @@ export const AuthProvider = ({ children }) => {
         toast.success("Logged in successfully");
         navigate("/");
       } else {
-        toast.error(data.detail || Object.values(data)[0]?.[0] || "Login failed");
+        toast.error(
+          data.detail || Object.values(data)[0]?.[0] || "Login failed",
+        );
       }
     } catch (err) {
       toast.error("Error logging in");
@@ -48,11 +55,14 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await fetch("http://localhost:8000/api/register/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        "https://gym-crm-backend-1-es0x.onrender.com/api/register/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        },
+      );
       if (response.ok) {
         toast.success("Registered successfully, please login");
         navigate("/login");
