@@ -11,6 +11,7 @@ import {
   Server,
   RefreshCw,
   LogOut,
+  UserCheck,
 } from "lucide-react";
 
 function NavItem({ icon: Icon, label, path, exact }) {
@@ -30,7 +31,7 @@ function NavItem({ icon: Icon, label, path, exact }) {
 }
 
 function Sidebar({ isOpen, onClose }) {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   return (
     <>
@@ -63,6 +64,9 @@ function Sidebar({ isOpen, onClose }) {
           <NavItem icon={Package} label="Packages" path="/packages" />
           <NavItem icon={Server} label="Services" path="/services" />
           <NavItem icon={RefreshCw} label="Cycles" />
+          {user?.role === "admin" && (
+            <NavItem icon={UserCheck} label="Users" path="/users" />
+          )}
         </nav>
 
         <div className="p-4 border-t border-slate-700">

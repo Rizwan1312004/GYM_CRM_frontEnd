@@ -18,6 +18,8 @@ import Attendance from "./pages/Attendance";
 import ActivitiesList from "./pages/ActivitiesList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import UsersList from "./pages/UsersList";
+import EditUser from "./pages/EditUser";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -47,6 +49,8 @@ function AuthenticatedLayout() {
           <Route path="/members" element={<MembersList />} />
           <Route path="/members/add" element={<AddMember />} />
           <Route path="/members/:id" element={<MemberProfile />} />
+          <Route path="/users" element={<UsersList />} />
+          <Route path="/users/edit/:id" element={<EditUser />} />
           {/* Fallback route for unimplemented pages */}
           <Route path="*" element={<div className="p-6 text-slate-500">Page under construction...</div>} />
         </Routes>

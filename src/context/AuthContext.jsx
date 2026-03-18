@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await fetch(
-        "https://gym-crm-backend-1-es0x.onrender.com/api/token/",
+        `${import.meta.env.VITE_API_URL}/api/token/`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -43,20 +43,23 @@ export const AuthProvider = ({ children }) => {
         setToken(data.access);
         toast.success("Logged in successfully");
         navigate("/");
+        return true;
       } else {
         toast.error(
           data.detail || Object.values(data)[0]?.[0] || "Login failed",
         );
+        return false;
       }
     } catch (err) {
       toast.error("Error logging in");
+      return false;
     }
   };
 
   const register = async (userData) => {
     try {
       const response = await fetch(
-        "https://gym-crm-backend-1-es0x.onrender.com/api/register/",
+        `${import.meta.env.VITE_API_URL}/api/register/`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
