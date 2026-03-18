@@ -69,7 +69,7 @@ export default function EditUser() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/users/${id}/`, {
+        const res = await fetch(`${API_BASE}/users/${id}/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error();
@@ -110,7 +110,7 @@ export default function EditUser() {
       const payload = { ...form };
       if (!payload.password) delete payload.password;
 
-      const res = await fetch(`${API_BASE}/api/users/${id}/`, {
+      const res = await fetch(`${API_BASE}/users/${id}/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
