@@ -133,8 +133,8 @@ export default function UsersList() {
       setLoading(true);
       try {
         const url = query
-          ? `${API_BASE}/api/users/?search=${encodeURIComponent(query)}`
-          : `${API_BASE}/api/users/`;
+          ? `${API_BASE}/users/?search=${encodeURIComponent(query)}`
+          : `${API_BASE}/users/`;
         const res = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -164,7 +164,7 @@ export default function UsersList() {
     if (!deleteTarget) return;
     setDeleteLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/api/users/${deleteTarget.id}/`, {
+      const res = await fetch(`${API_BASE}/users/${deleteTarget.id}/`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
