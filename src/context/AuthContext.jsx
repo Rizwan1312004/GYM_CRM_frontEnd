@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/token/`,
+        `${import.meta.env.VITE_API_URL}/token/`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/register/`,
+        `${import.meta.env.VITE_API_URL}/register/`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
